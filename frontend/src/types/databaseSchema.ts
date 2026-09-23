@@ -14,7 +14,7 @@ export interface IUser {
     name: string
 }
 
-export interface IGoals {
+export interface IGoal {
     goal_id: number,
     user_id: number,
 
@@ -32,9 +32,7 @@ export interface IGoals {
     updated_at: Date,
 }
 
-
-
-export interface IMilestones {
+export interface IMilestone {
     milestone_id: number,
     goal_id: number,
     position: number,
@@ -52,7 +50,7 @@ export interface IMilestones {
     updated_at: Date,
 }
 
-export interface IWorkpackages {
+export interface IWorkpackage {
     workpackage_id: number,
     milestone_id: number,
     parent_workpackage_id?: number
@@ -67,14 +65,14 @@ export interface IWorkpackages {
     updated_at: Date,
 }
 
-export interface IDailyPlans {
+export interface IDailyPlan {
     daily_plan_id: number,
     user_id: number,
     plan_date: Date,
     status: DailyPlanStatusType,
 }
 
-export interface IDailyPlanItems {
+export interface IDailyPlanItem {
     daily_plan_item_id: number,
     daily_plan_id: number,
     workpackage_id: number,
@@ -83,37 +81,37 @@ export interface IDailyPlanItems {
     status: DailyPlanItemStatusType,
 }
 
-export interface ISettings {
-  setting_id: number,
-  long_term_goal?: string
-  short_term_goal?: string
-  max_active_goals: number
-  max_workpackages_per_day: number,
-  max_work_minutes_per_day: number,
-  report_interval: SettingReportIntervalType,
+export interface ISetting {
+    setting_id: number,
+    long_term_goal?: string
+    short_term_goal?: string
+    max_active_goals: number
+    max_workpackages_per_day: number,
+    max_work_minutes_per_day: number,
+    report_interval: SettingReportIntervalType,
 }
 
-export interface ITags {
+export interface ITag {
     tag_id: number,
     title: string,
     description?: string,
     priority: number,
 }
 
-export interface IWbsLogs {
-  wbs_log_id: number,
-  workpackage_id: number, 
-  started_at: Date,
-  ended_at: Date,
+export interface IWbsLog {
+    wbs_log_id: number,
+    workpackage_id: number,
+    started_at: Date,
+    ended_at: Date,
 }
 
 export interface IGoalTag {
-  goal_id: number,
-  tag_id: number,
+    goal_id: number,
+    tag_id: number,
 }
 
 export interface IWbsDependency {
-  current_workpackage_id: number,
-  required_workpackage_id: number,
+    current_workpackage_id: number,
+    required_workpackage_id: number,
 }
 
