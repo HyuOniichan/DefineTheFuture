@@ -13,6 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as GoalsIndexRouteImport } from './routes/goals/index'
 import { Route as GoalsGoalIdRouteImport } from './routes/goals/$goalId'
+import { Route as ReportsIndexRouteImport } from './routes/reports/index'
+import { Route as SettingsIndexRouteImport } from './routes/settings/index'
+import { Route as TodayIndexRouteImport } from './routes/today/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,17 +37,38 @@ const GoalsGoalIdRoute = GoalsGoalIdRouteImport.update({
   path: '/$goalId',
   getParentRoute: () => GoalsRoute,
 } as any)
+const ReportsIndexRoute = ReportsIndexRouteImport.update({
+  id: '/reports/',
+  path: '/reports/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsIndexRoute = SettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TodayIndexRoute = TodayIndexRouteImport.update({
+  id: '/today/',
+  path: '/today/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/goals': typeof GoalsRouteWithChildren
   '/goals/$goalId': typeof GoalsGoalIdRoute
   '/goals/': typeof GoalsIndexRoute
+  '/reports/': typeof ReportsIndexRoute
+  '/settings/': typeof SettingsIndexRoute
+  '/today/': typeof TodayIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/goals/$goalId': typeof GoalsGoalIdRoute
   '/goals': typeof GoalsIndexRoute
+  '/reports': typeof ReportsIndexRoute
+  '/settings': typeof SettingsIndexRoute
+  '/today': typeof TodayIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -52,18 +76,39 @@ export interface FileRoutesById {
   '/goals': typeof GoalsRouteWithChildren
   '/goals/$goalId': typeof GoalsGoalIdRoute
   '/goals/': typeof GoalsIndexRoute
+  '/reports/': typeof ReportsIndexRoute
+  '/settings/': typeof SettingsIndexRoute
+  '/today/': typeof TodayIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/goals' | '/goals/$goalId' | '/goals/'
+  fullPaths:
+    | '/'
+    | '/goals'
+    | '/goals/$goalId'
+    | '/goals/'
+    | '/reports/'
+    | '/settings/'
+    | '/today/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/goals/$goalId' | '/goals'
-  id: '__root__' | '/' | '/goals' | '/goals/$goalId' | '/goals/'
+  to: '/' | '/goals/$goalId' | '/goals' | '/reports' | '/settings' | '/today'
+  id:
+    | '__root__'
+    | '/'
+    | '/goals'
+    | '/goals/$goalId'
+    | '/goals/'
+    | '/reports/'
+    | '/settings/'
+    | '/today/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GoalsRoute: typeof GoalsRouteWithChildren
+  ReportsIndexRoute: typeof ReportsIndexRoute
+  SettingsIndexRoute: typeof SettingsIndexRoute
+  TodayIndexRoute: typeof TodayIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -96,6 +141,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GoalsGoalIdRouteImport
       parentRoute: typeof GoalsRoute
     }
+    '/reports/': {
+      id: '/reports/'
+      path: '/reports'
+      fullPath: '/reports/'
+      preLoaderRoute: typeof ReportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/': {
+      id: '/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/today/': {
+      id: '/today/'
+      path: '/today'
+      fullPath: '/today/'
+      preLoaderRoute: typeof TodayIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -114,6 +180,9 @@ const GoalsRouteWithChildren = GoalsRoute._addFileChildren(GoalsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GoalsRoute: GoalsRouteWithChildren,
+  ReportsIndexRoute: ReportsIndexRoute,
+  SettingsIndexRoute: SettingsIndexRoute,
+  TodayIndexRoute: TodayIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
