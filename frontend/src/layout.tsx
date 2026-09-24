@@ -1,6 +1,10 @@
 import { Outlet } from "@tanstack/react-router"
+
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/shared/Sidebar"
+import { AppBreadcrumb } from "./components/shared/Breadcrumb"
+
+
 
 export default function RootLayout() {
     return (
@@ -8,7 +12,10 @@ export default function RootLayout() {
             <AppSidebar />
             <main className="flex flex-1 min-h-screen">
                 <SidebarTrigger className="m-2 z-30" />
-                <div className="w-full max-w-[1400px] pt-0 px-12 pb-15">
+                <div className="w-full max-w-[1400px] pt-0 px-4 pb-15">
+                    <header className="flex h-[52px] items-center justify-between border-b-[1px] border-[#e2e6e2]">
+                        <AppBreadcrumb />
+                    </header>
                     <Outlet />
                 </div>
             </main>
