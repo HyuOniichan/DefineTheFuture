@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
     Sidebar,
     SidebarContent,
@@ -21,19 +22,21 @@ import {
     User,
     Ellipsis
 } from "lucide-react"
-import { useState } from "react";
+import type { SidebarItemType } from "@/types/navigationTypes";
 
 const APP_NAME = "DefineTheFuture";
 const USER_NAME = "DND. HUY";
-const sidebarItems = [
-    { title: "Dashboard", url: "/", icon: House, newCount: 0 },
+const DEFAULT_SIDEBAR_ITEM_TITLE = "Home";
+
+const sidebarItems: SidebarItemType[] = [
+    { title: "Home", url: "/", icon: House, newCount: 0 },
     { title: "Today", url: "/today", icon: ListChecks, newCount: 3 },
     { title: "Goals", url: "/goals", icon: Goal, newCount: 0 },
     { title: "Reports", url: "/reports", icon: ChartColumn, newCount: 0 },
 ]
 
 export function AppSidebar() {
-    const [activeSidebarItem, setActiveSidebarItem] = useState("Dashboard");
+    const [activeSidebarItem, setActiveSidebarItem] = useState(DEFAULT_SIDEBAR_ITEM_TITLE);
 
     return (
         <Sidebar variant="inset" className="flex w-60 shrink-0 grow-0 flex-col bg-[#eef1ed] px-4.25 pb-4.5 pt-6.75">
@@ -72,11 +75,11 @@ export function AppSidebar() {
                                             `}
                                         >
                                             <div className="flex gap-2 place-items-center">
-                                                <sidebarItem.icon className="size-4" />
+                                                {sidebarItem.icon && (<sidebarItem.icon className="size-4" />)}
                                                 <span className="font-bold">{sidebarItem.title}</span>
                                             </div>
 
-                                            {sidebarItem.newCount > 0 && (
+                                            {(sidebarItem.newCount ?? 0) > 0 && (
                                                 <span className="ml-auto rounded-full bg-[#e0f8eb] px-[7px] py-[2px] text-[11px] font-normal text-[#258254]">
                                                     {sidebarItem.newCount}
                                                 </span>
