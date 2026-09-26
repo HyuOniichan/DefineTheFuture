@@ -13,7 +13,6 @@ import {
     SidebarMenuItem
 } from "@/components/ui/sidebar"
 import {
-    StarCheck,
     House,
     ListChecks,
     Goal,
@@ -23,9 +22,9 @@ import {
     Ellipsis,
 } from "lucide-react"
 import type { SidebarItemType } from "@/types";
+import { USER_NAME } from "@/utils/mockData";
+import { Logo } from "./Logo";
 
-const APP_NAME = "DefineTheFuture";
-const USER_NAME = "DND. HUY";
 const DEFAULT_SIDEBAR_ITEM_TITLE = "Home";
 
 const sidebarItems: SidebarItemType[] = [
@@ -41,12 +40,7 @@ export function AppSidebar() {
     return (
         <Sidebar variant="inset" className="flex w-60 shrink-0 grow-0 flex-col bg-[#eef1ed] px-4.25 pb-4.5 pt-6.75">
             <SidebarHeader className="bg-[#eef1ed]">
-                <Link to="/" className="flex gap-2 place-items-center">
-                    <div className="grid size-[27px] place-items-center rounded-[7px] bg-[#17201d] text-white">
-                        <StarCheck className="w-7" />
-                    </div>
-                    <span className="text-[16px] tracking-wide text-[#18211e] font-bold">{APP_NAME}</span>
-                </Link>
+                <Logo />
             </SidebarHeader>
 
             <SidebarContent className="bg-[#eef1ed]">

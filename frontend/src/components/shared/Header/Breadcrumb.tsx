@@ -14,7 +14,7 @@ import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 
 export function AppBreadcrumb() {

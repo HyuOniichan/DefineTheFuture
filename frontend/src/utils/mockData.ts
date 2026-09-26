@@ -2,6 +2,12 @@ import type { IGoal, IUser, NotificationType } from "@/types";
 import { Info, TriangleAlert } from "lucide-react";
 
 
+
+export const APP_NAME = "DefineTheFuture";
+export const USER_NAME = "DND. HUY";
+
+
+
 export const mockUsers: IUser[] = [
     { user_id: 1, setting_id: 1, name: "Test 001" }
 ];

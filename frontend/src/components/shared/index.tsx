@@ -1,9 +1,12 @@
-import { AppBreadcrumb } from "./Breadcrumb";
-import { AppSidebar } from "./Sidebar";
-import { HeaderActions } from "./HeaderActions";
+import { AppSidebar } from "./Sidebar/Sidebar";
+import { Logo } from "./Sidebar/Logo";
+import { Header } from "./Header/Header";
+import { AppBreadcrumb } from "./Header/Breadcrumb";
+import { HeaderActions } from "./Header/HeaderActions";
+import { MetricCard } from "./Home/MetricCard";
 
 export {
-    AppBreadcrumb as Breadcrumb,
-    AppSidebar as Sidebar,
-    HeaderActions,
+    AppSidebar as Sidebar, Logo,
+    Header, AppBreadcrumb as Breadcrumb, HeaderActions,
+    MetricCard
 }
