@@ -46,7 +46,7 @@ export function AppBreadcrumb() {
                         <BreadcrumbItem>
                             <DropdownMenu>
                                 <DropdownMenuTrigger 
-                                    render={<Ellipsis className="size-7 p-1 rounded-lg hover:bg-[#f4f4f0] hover:cursor-pointer" />} 
+                                    render={<Ellipsis className="size-7 p-1 rounded-lg hover:bg-[#f4f4f0]" />} 
                                 />
                                 <DropdownMenuContent>
                                     <DropdownMenuGroup>
@@ -56,9 +56,7 @@ export function AppBreadcrumb() {
 
                                             return (index < breadcrumbLength - 2) && (
                                                 <Link key={match.id} to={match.pathname} className="w-full">
-                                                    <DropdownMenuItem className="hover:cursor-pointer">
-                                                        {displayTitle}
-                                                    </DropdownMenuItem>
+                                                    <DropdownMenuItem>{displayTitle}</DropdownMenuItem>
                                                 </Link>
                                             )
                                         })}

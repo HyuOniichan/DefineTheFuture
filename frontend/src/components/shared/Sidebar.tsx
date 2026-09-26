@@ -70,7 +70,7 @@ export function AppSidebar() {
                                             isActive={sidebarItem.title === activeSidebarItem}
                                             className={`
                                                 h-auto rounded-[7px] px-3 py-[11px] text-[14px] text-[#66706b]
-                                                hover:bg-transparent hover:text-[#18211e] hover:cursor-pointer
+                                                hover:bg-transparent hover:text-[#18211e]
                                                 ${sidebarItem.title === activeSidebarItem ? '!bg-white text-[#18211e] font-semibold shadow-[0_1px_2px_rgba(30,45,36,0.06)]' : ''}
                                             `}
                                         >
@@ -109,7 +109,7 @@ export function AppSidebar() {
                                 isActive={activeSidebarItem === "settings"}
                                 className={`
                                     h-auto rounded-[7px] px-3 py-[11px] text-[14px] text-[#66706b]
-                                    hover:bg-transparent hover:text-[#18211e] hover:cursor-pointer
+                                    hover:bg-transparent hover:text-[#18211e]
                                     ${activeSidebarItem === "settings" ? '!bg-white text-[#18211e] font-semibold shadow-[0_1px_2px_rgba(30,45,36,0.06)]' : ''}
                                 `}
                             >
@@ -135,7 +135,7 @@ export function AppSidebar() {
                         className="ml-auto grid size-6 shrink-0 place-items-center rounded-md text-[#909a95] hover:bg-white"
                         aria-label="User menu"
                     >
-                        <Ellipsis className="size-4 hover:cursor-pointer" />
+                        <Ellipsis className="size-4" />
                     </button>
                 </div>
 
