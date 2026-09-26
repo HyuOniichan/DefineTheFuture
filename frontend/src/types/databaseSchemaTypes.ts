@@ -8,6 +8,8 @@ type SettingReportIntervalType = "day" | "week" | "month" | "year" | "never";
 
 
 
+// Main tables
+
 export interface IUser {
     user_id: number,
     setting_id: number,
@@ -81,6 +83,10 @@ export interface IDailyPlanItem {
     status: DailyPlanItemStatusType,
 }
 
+
+
+// Submain tables
+
 export interface ISetting {
     setting_id: number,
     long_term_goal?: string
@@ -89,6 +95,15 @@ export interface ISetting {
     max_workpackages_per_day: number,
     max_work_minutes_per_day: number,
     report_interval: SettingReportIntervalType,
+}
+
+export interface INotification {
+    notification_id: number,
+    title: string,
+    description?: string,
+    is_read: boolean,
+    url?: string,
+    created_by?: number
 }
 
 export interface ITag {
@@ -104,6 +119,10 @@ export interface IWbsLog {
     started_at: Date,
     ended_at: Date,
 }
+
+
+
+// Supporting tables
 
 export interface IGoalTag {
     goal_id: number,
