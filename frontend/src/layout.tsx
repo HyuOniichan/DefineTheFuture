@@ -1,7 +1,7 @@
 import { Outlet } from "@tanstack/react-router"
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { Sidebar, Breadcrumb } from "@/components/shared";
+import { Sidebar, Breadcrumb, HeaderActions } from "@/components/shared";
 
 
 
@@ -14,6 +14,7 @@ export default function RootLayout() {
                 <div className="w-full max-w-[1400px] pt-0 px-4 pb-15">
                     <header className="flex h-[52px] items-center justify-between border-b-[1px] border-[#e2e6e2]">
                         <Breadcrumb />
+                        <HeaderActions />
                     </header>
                     <Outlet />
                 </div>

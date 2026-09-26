@@ -19,10 +19,10 @@ import {
     Goal,
     ChartColumn,
     Settings,
-    User,
-    Ellipsis
+    UserRound,
+    Ellipsis,
 } from "lucide-react"
-import type { SidebarItemType } from "@/types/navigationTypes";
+import type { SidebarItemType } from "@/types";
 
 const APP_NAME = "DefineTheFuture";
 const USER_NAME = "DND. HUY";
@@ -75,11 +75,11 @@ export function AppSidebar() {
                                             `}
                                         >
                                             <div className="flex gap-2 place-items-center">
-                                                {sidebarItem.icon && (<sidebarItem.icon className="size-4" />)}
+                                                <sidebarItem.icon className="size-4" />
                                                 <span className="font-bold">{sidebarItem.title}</span>
                                             </div>
 
-                                            {(sidebarItem.newCount ?? 0) > 0 && (
+                                            {(sidebarItem.newCount > 0) && (
                                                 <span className="ml-auto rounded-full bg-[#e0f8eb] px-[7px] py-[2px] text-[11px] font-normal text-[#258254]">
                                                     {sidebarItem.newCount}
                                                 </span>
@@ -119,10 +119,11 @@ export function AppSidebar() {
                         </Link>
                     </SidebarMenuItem>
                 </SidebarMenu>
-
+                
+                {/* Account / Avatar */}
                 <div className="flex items-center gap-[9px] p-1">
                     <div className="grid size-[31px] shrink-0 place-items-center rounded-full bg-[#d3e8dc] text-[10px] font-bold text-[#317456]">
-                        <User className="size-4" />
+                        <UserRound className="size-4" />
                     </div>
 
                     <div className="min-w-0">
