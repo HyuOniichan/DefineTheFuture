@@ -1,12 +1,12 @@
 import type { AvatarItemType } from "@/types";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import {
     User,
     Settings,
