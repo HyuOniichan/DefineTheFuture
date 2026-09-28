@@ -1,4 +1,5 @@
-import type { IGoal, IUser, NotificationType } from "@/types";
+import type { IUser, NotificationType } from "@/types";
+import type { GoalType } from "@/types/userDataTypes";
 import { Info, TriangleAlert } from "lucide-react";
 
 
@@ -13,7 +14,7 @@ export const mockUsers: IUser[] = [
 ];
 
 
-export const mockGoals: IGoal[] = [
+export const mockGoals: GoalType[] = [
     {
         goal_id: 1,
         user_id: 1,
@@ -28,6 +29,8 @@ export const mockGoals: IGoal[] = [
         actual_end_date: new Date(),
         created_at: new Date(),
         updated_at: new Date(),
+        progress: 30,
+        tag_titles: ["Robotics"]
     },
     {
         goal_id: 2,
@@ -35,7 +38,7 @@ export const mockGoals: IGoal[] = [
         title: "Computer Vision",
         description: "Description",
         expected_outcome: "Expected outcome",
-        status: "active",
+        status: "backlog",
         status_reason: "Who care?",
         planned_start_date: new Date(),
         planned_end_date: new Date(),
@@ -43,6 +46,8 @@ export const mockGoals: IGoal[] = [
         actual_end_date: new Date(),
         created_at: new Date(),
         updated_at: new Date(),
+        progress: 60,
+        tag_titles: ["AI", "Computer Vision"]
     }
 ];
 
