@@ -38,7 +38,7 @@ export function AppSidebar() {
     const [activeSidebarItem, setActiveSidebarItem] = useState(DEFAULT_SIDEBAR_ITEM_TITLE);
 
     return (
-        <Sidebar variant="inset" className="flex w-60 shrink-0 grow-0 flex-col bg-[#eef1ed] px-4.25 pb-4.5 pt-6.75">
+        <Sidebar variant="inset" className="flex shrink-0 grow-0 flex-col bg-[#eef1ed] px-4.25 pb-4.5 pt-6.75">
             <SidebarHeader className="bg-[#eef1ed]">
                 <Logo />
             </SidebarHeader>

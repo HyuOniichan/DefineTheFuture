@@ -21,7 +21,7 @@ export function Hero(props: HeroProps) {
             </div>
 
             {props.buttonInnerHtml && (
-                <Button className="flex gap-2 w-36 h-12 pr-4">
+                <Button className="flex gap-2 w-33 h-11 pr-4">
                     {props.buttonInnerHtml}
                 </Button>
             )}
