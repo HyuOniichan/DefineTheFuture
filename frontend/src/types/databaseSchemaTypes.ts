@@ -1,14 +1,24 @@
 
+interface PostgresIntervalType {
+    years?: number;
+    months?: number;
+    days?: number;
+    hours?: number;
+    minutes?: number;
+    seconds?: number;
+    milliseconds?: number;
+}
+
+type IntervalType = PostgresIntervalType | string;
+type DateType = Date | string;
+
 type GoalStatusType = "backlog" | "active" | "achieved" | "suspended" | "dropped";
 type WorkpackageStatusType = "pending" | "in_progress" | "blocked" | "done" | "cancelled";
 type DailyPlanItemCreatedByType = "system" | "user";
 type DailyPlanItemStatusType = "pending" | "in_progress" | "completed" | "skipped";
 type DailyPlanStatusType = "draft" | "pending" | "in_progress" | "completed" | "cancelled";
-type SettingReportIntervalType = "day" | "week" | "month" | "year" | "never";
 
 
-
-// Main tables
 
 export interface IUser {
     user_id: number,
@@ -24,14 +34,13 @@ export interface IGoal {
     description?: string,
     expected_outcome?: string,
     status: GoalStatusType,
-    status_reason?: string,
 
-    planned_start_date: Date,
-    planned_end_date: Date,
-    actual_start_date: Date,
-    actual_end_date: Date,
-    created_at: Date,
-    updated_at: Date,
+    planned_start_date: DateType,
+    planned_end_date: DateType,
+    actual_start_date: DateType,
+    actual_end_date: DateType,
+    created_at: DateType,
+    updated_at: DateType,
 }
 
 export interface IMilestone {
@@ -44,12 +53,12 @@ export interface IMilestone {
     expected_outcome?: string,
     final_output?: string,
 
-    planned_start_date: Date,
-    planned_end_date: Date,
-    actual_start_date: Date,
-    actual_end_date: Date,
-    created_at: Date,
-    updated_at: Date,
+    planned_start_date: DateType,
+    planned_end_date: DateType,
+    actual_start_date: DateType,
+    actual_end_date: DateType,
+    created_at: DateType,
+    updated_at: DateType,
 }
 
 export interface IWorkpackage {
@@ -61,16 +70,17 @@ export interface IWorkpackage {
     title: string,
     description?: string,
     expected_duration_hours: number,
+    actual_duration_hours: number,
     status: WorkpackageStatusType,
-    completed_at: Date,
-    created_at: Date,
-    updated_at: Date,
+    completed_at: DateType,
+    created_at: DateType,
+    updated_at: DateType,
 }
 
 export interface IDailyPlan {
     daily_plan_id: number,
     user_id: number,
-    plan_date: Date,
+    plan_date: DateType,
     status: DailyPlanStatusType,
 }
 
@@ -83,10 +93,6 @@ export interface IDailyPlanItem {
     status: DailyPlanItemStatusType,
 }
 
-
-
-// Submain tables
-
 export interface ISetting {
     setting_id: number,
     long_term_goal?: string
@@ -94,7 +100,7 @@ export interface ISetting {
     max_active_goals: number
     max_workpackages_per_day: number,
     max_work_minutes_per_day: number,
-    report_interval: SettingReportIntervalType,
+    report_interval: IntervalType,
 }
 
 export interface INotification {
@@ -116,13 +122,9 @@ export interface ITag {
 export interface IWbsLog {
     wbs_log_id: number,
     workpackage_id: number,
-    started_at: Date,
-    ended_at: Date,
+    started_at: DateType,
+    duration: IntervalType,
 }
-
-
-
-// Supporting tables
 
 export interface IGoalTag {
     goal_id: number,

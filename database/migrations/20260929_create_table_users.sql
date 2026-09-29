@@ -1,0 +1,7 @@
+drop table if exists users;
+
+create table users (
+	user_id serial primary key,
+	setting_id integer not null,
+	"name" varchar(255)
+);
