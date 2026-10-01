@@ -26,3 +26,6 @@ dist-ssr
 # Lib outputs
 .tanstack/
 .tanstack
+
+# Secret
+.env

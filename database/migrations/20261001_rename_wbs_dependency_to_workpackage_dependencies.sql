@@ -1,0 +1,1 @@
+alter table wbs_dependency rename to workpackage_dependencies;
