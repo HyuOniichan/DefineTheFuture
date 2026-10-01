@@ -1,8 +1,8 @@
 import { pool } from "../config/db";
-import type { UserType } from "../types";
+import type { GetUserType } from "../schemas";
 
 export const UserModel = {
-    getAllUsers: async ():Promise<UserType[] | null> => {
+    getAllUsers: async (): Promise<GetUserType[] | null> => {
         try {
             const sql = `
                 select u.name, s.long_term_goal, s.short_term_goal, s.max_active_goals, 
@@ -16,7 +16,7 @@ export const UserModel = {
             throw new Error(err?.message || String(err));
         }
     },
-    getUserById: async (user_id: string):Promise<UserType | null> => {
+    getUserById: async (user_id: string): Promise<GetUserType | null> => {
         try {
             const sql = `
                 select u.name, s.long_term_goal, s.short_term_goal, s.max_active_goals, 

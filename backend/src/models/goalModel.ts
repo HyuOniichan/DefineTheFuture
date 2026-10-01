@@ -1,6 +1,6 @@
 import { pool } from "../config/db";
-import type { GoalType } from "../types";
-import type { CreateGoalType, EditGoalType } from "../types/goalType";
+import type { GoalType } from "../schemas";
+import type { CreateGoalType, EditGoalType } from "../schemas";
 
 export const GoalModel = {
     getAllGoals: async (user_id: string = ""): Promise<GoalType[] | null> => {
@@ -63,7 +63,7 @@ export const GoalModel = {
     updateGoal: async (goal_id: string, editedGoal: EditGoalType): Promise<GoalType | null> => {
         try {
             const updateFields = Object.entries(editedGoal).map(
-                ([k, v], i) => `${k} = $${i+1}`
+                ([k, v], i) => `${k} = $${i + 1}`
             )
             const updateFieldStr = updateFields.join(', ');
             const nextParamIndex = updateFields.length + 1;
@@ -74,7 +74,7 @@ export const GoalModel = {
                 where goal_id = $${nextParamIndex}
                 returning *
             `;
-            
+
             const values = Object.entries(editedGoal).map(([k, v]) => v);
             values.push(goal_id);
 
