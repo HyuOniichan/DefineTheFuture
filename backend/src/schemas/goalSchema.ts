@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { 
+import {
     VARCHAR_LENGTH, WbsDateSchema, AutoTimestamptzSchema,
     validateStartEndDate
 } from './shared';
@@ -36,7 +36,7 @@ export const MilestoneSchema = z.object({
     milestone_id: z.number().int().positive(),
     goal_id: z.number().int().positive(),
     position: z.number().int().positive(),
-    
+
     title: z.string().min(1).max(VARCHAR_LENGTH),
     description: z.string().default(""),
     expected_outcome: z.string().default(""),
@@ -62,9 +62,23 @@ export const GoalTagSchema = z.object({
 
 // --- Extended schemas
 
-export const GetGoalSchema = GoalSchema.omit({ goal_id: true });
+export const GetGoalsQuerySchema = z.object({
+    user_id: z.coerce.number()
+        .int().positive()
+        .optional()
+        .transform(val => {
+            if (val === undefined) return val;
+            return String(val);
+        }),
+});
 
-export const CreateGoalSchema = GoalSchema.pick({
+export const GetGoalParamsSchema = z.object({
+    id: z.coerce.number().int().positive().transform(val => String(val)),
+});
+
+export const GetGoalReturnSchema = GoalSchema.omit({ goal_id: true });
+
+export const CreateGoalBodySchema = GoalSchema.pick({
     user_id: true,
     title: true,
     description: true,
@@ -73,13 +87,18 @@ export const CreateGoalSchema = GoalSchema.pick({
     planned_end_date: true,
 }).superRefine(validateStartEndDate);
 
-export const EditGoalSchema = GoalSchema.omit({
-    goal_id: true,
-    user_id: true,
-    actual_start_date: true,
-    actual_end_date: true,
-    created_at: true,
-    updated_at: true,
+
+export const EditGoalParamsSchema = z.object({
+    id: z.coerce.number().int().positive().transform(val => String(val)),
+});
+
+export const EditGoalBodySchema = GoalSchema.pick({
+    title: true,
+    description: true,
+    expected_outcome: true,
+    status: true,
+    planned_start_date: true,
+    planned_end_date: true,
 }).partial().superRefine(validateStartEndDate);
 
 
@@ -93,6 +112,9 @@ export type MilestoneType = z.infer<typeof MilestoneSchema>;
 export type TagType = z.infer<typeof TagSchema>;
 export type GoalTagType = z.infer<typeof GoalTagSchema>;
 
-export type GetGoalType = z.infer<typeof GetGoalSchema>;
-export type CreateGoalType = z.infer<typeof CreateGoalSchema>;
-export type EditGoalType = z.infer<typeof EditGoalSchema>;
+export type GetGoalsQueryType = z.infer<typeof GetGoalsQuerySchema>;
+export type GetGoalParamsType = z.infer<typeof GetGoalParamsSchema>;
+export type GetGoalReturnType = z.infer<typeof GetGoalReturnSchema>;
+export type CreateGoalBodyType = z.infer<typeof CreateGoalBodySchema>;
+export type EditGoalParamsType = z.infer<typeof EditGoalParamsSchema>;
+export type EditGoalBodyType = z.infer<typeof EditGoalBodySchema>;

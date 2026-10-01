@@ -12,22 +12,22 @@ import {
     DEFAULT_DAILY_PLAN_ITEM_CREATED_BY, DEFAULT_DAILY_PLAN_ITEM_STATUS, DEFAULT_DAILY_PLAN_STATUS,
     DailyPlanItemCreatedBySchema, DailyPlanItemStatusSchema, DailyPlanStatusSchema, 
     UserSchema, SettingSchema, NotificationSchema, DailyPlanItemSchema, DailyPlanSchema, 
-    GetUserSchema,
+    GetUserParamsSchema, GetUserSchema,
 } from './userSchema';
 import type { 
     DailyPlanItemCreatedByType, DailyPlanItemStatusType, DailyPlanStatusType,
     UserType, SettingType, NotificationType, DailyPlanItemType, DailyPlanType,
-    GetUserType,
+    GetUserParamsType, GetUserType,
 } from './userSchema';
 import {
     DEFAULT_GOAL_STATUS, DEFAULT_TAG_PRIORITY,
     GoalStatusSchema, GoalSchema, MilestoneSchema, TagSchema, GoalTagSchema,
-    GetGoalSchema, CreateGoalSchema, EditGoalSchema,
+    GetGoalsQuerySchema, GetGoalParamsSchema, GetGoalReturnSchema, CreateGoalBodySchema, EditGoalBodySchema, EditGoalParamsSchema
 } from './goalSchema';
 import type {
     GoalStatusType,
     GoalType, MilestoneType, TagType, GoalTagType, 
-    GetGoalType, CreateGoalType, EditGoalType,
+    GetGoalsQueryType, GetGoalParamsType, GetGoalReturnType, CreateGoalBodyType, EditGoalBodyType, EditGoalParamsType
 } from './goalSchema';
 
 
@@ -40,11 +40,11 @@ export {
     DEFAULT_DAILY_PLAN_ITEM_CREATED_BY, DEFAULT_DAILY_PLAN_ITEM_STATUS, DEFAULT_DAILY_PLAN_STATUS,
     DailyPlanItemCreatedBySchema, DailyPlanItemStatusSchema, DailyPlanStatusSchema, 
     UserSchema, SettingSchema, NotificationSchema, DailyPlanItemSchema, DailyPlanSchema, 
-    GetUserSchema, CreateGoalSchema, EditGoalSchema,
+    GetUserParamsSchema, GetUserSchema, 
     
     DEFAULT_GOAL_STATUS, DEFAULT_TAG_PRIORITY,
     GoalStatusSchema, GoalSchema, MilestoneSchema, TagSchema, GoalTagSchema,
-    GetGoalSchema,
+    GetGoalsQuerySchema, GetGoalParamsSchema, GetGoalReturnSchema, CreateGoalBodySchema, EditGoalBodySchema, EditGoalParamsSchema
 };
 
 export type {
@@ -53,9 +53,9 @@ export type {
     
     DailyPlanItemCreatedByType, DailyPlanItemStatusType, DailyPlanStatusType,
     UserType, SettingType, NotificationType, DailyPlanItemType, DailyPlanType,
-    GetUserType,
+    GetUserParamsType, GetUserType,
 
     GoalStatusType,
     GoalType, MilestoneType, TagType, GoalTagType, 
-    GetGoalType, CreateGoalType, EditGoalType,
+    GetGoalsQueryType, GetGoalParamsType, GetGoalReturnType, CreateGoalBodyType, EditGoalBodyType, EditGoalParamsType
 }

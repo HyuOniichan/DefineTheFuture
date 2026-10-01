@@ -77,6 +77,10 @@ export const DailyPlanSchema = z.object({
 
 // --- Extended schemas
 
+export const GetUserParamsSchema = z.object({
+    id: z.coerce.number().int().positive().transform(val => String(val)),
+});
+
 export const GetUserSchema = z.object({
     ...UserSchema.omit({ user_id: true }).shape,
     ...SettingSchema.omit({ setting_id: true }).shape,
@@ -97,4 +101,5 @@ export type NotificationType = z.infer<typeof NotificationSchema>;
 export type DailyPlanItemType = z.infer<typeof DailyPlanItemSchema>;
 export type DailyPlanType = z.infer<typeof DailyPlanSchema>;
 
+export type GetUserParamsType = z.infer<typeof GetUserParamsSchema>;
 export type GetUserType = z.infer<typeof GetUserSchema>;

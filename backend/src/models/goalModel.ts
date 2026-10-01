@@ -1,6 +1,6 @@
 import { pool } from "../config/db";
 import type { GoalType } from "../schemas";
-import type { CreateGoalType, EditGoalType } from "../schemas";
+import type { CreateGoalBodyType, EditGoalBodyType } from "../schemas";
 
 export const GoalModel = {
     getAllGoals: async (user_id: string = ""): Promise<GoalType[] | null> => {
@@ -40,7 +40,7 @@ export const GoalModel = {
         }
     },
 
-    createGoal: async (newGoal: CreateGoalType): Promise<GoalType | null> => {
+    createGoal: async (newGoal: CreateGoalBodyType): Promise<GoalType | null> => {
         try {
             const sql = `
                 insert into goals (
@@ -60,7 +60,7 @@ export const GoalModel = {
         }
     },
 
-    updateGoal: async (goal_id: string, editedGoal: EditGoalType): Promise<GoalType | null> => {
+    updateGoal: async (goal_id: string, editedGoal: EditGoalBodyType): Promise<GoalType | null> => {
         try {
             const updateFields = Object.entries(editedGoal).map(
                 ([k, v], i) => `${k} = $${i + 1}`
