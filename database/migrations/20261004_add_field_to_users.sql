@@ -1,0 +1,1 @@
+alter table users add column refresh_token text not null default('');
