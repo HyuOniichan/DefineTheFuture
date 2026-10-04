@@ -1,9 +1,8 @@
 import type { Request, Response } from "express"
 import { GoalModel } from "../models/goalModel";
-import type { 
-    GoalType, 
-    GetGoalParamsType, GetGoalsQueryType, 
-    GetGoalReturnType, CreateGoalBodyType, 
+import type {
+    GetGoalParamsType,
+    GetGoalType, CreateGoalBodyType,
     EditGoalBodyType,
     EditGoalParamsType,
 } from "../schemas";
@@ -12,11 +11,11 @@ import type { ResponseType } from "../types";
 export const GoalController = {
     // [GET] /goal
     getGoals: async (
-        req: Request<any, ResponseType<GetGoalReturnType[]>, any, GetGoalsQueryType>,
-        res: Response<ResponseType<GetGoalReturnType[]>>
+        req: Request,
+        res: Response<ResponseType<GetGoalType[]>>
     ): Promise<void> => {
         try {
-            const user_id = req.query?.user_id || "";
+            const user_id = req.user?.user_id || "";
             const goals = await GoalModel.getAllGoals(user_id);
 
             if (!goals) {
@@ -34,18 +33,18 @@ export const GoalController = {
     // [GET] /goal/:id
     getGoal: async (
         req: Request<GetGoalParamsType>,
-        res: Response<ResponseType<GetGoalReturnType>>
+        res: Response<ResponseType<GetGoalType>>
     ): Promise<void> => {
         try {
-            const goal_id = req.params.id;
+            const user_id = req.user?.user_id || "";
 
+            const goal_id = req.params.id;
             if (!goal_id) {
                 res.status(400).json({ status: "failed", message: "goal's id is not provided" });
                 return;
             }
 
-            const goal = await GoalModel.getGoalById(goal_id);
-
+            const goal = await GoalModel.getGoalById(user_id, goal_id);
             if (!goal) {
                 res.status(404).json({ status: "failed", message: "goal not found" });
                 return;
@@ -60,13 +59,14 @@ export const GoalController = {
 
     // [POST] /goal
     postGoal: async (
-        req: Request<any, ResponseType<GoalType>, CreateGoalBodyType>, 
-        res: Response<ResponseType<GoalType>>
+        req: Request<any, ResponseType<GetGoalType>, CreateGoalBodyType>,
+        res: Response<ResponseType<GetGoalType>>
     ): Promise<void> => {
         try {
+            const user_id = req.user?.user_id || "";
             const newGoal = req.body;
-            const createdGoal = await GoalModel.createGoal(newGoal);
 
+            const createdGoal = await GoalModel.createGoal(user_id, newGoal);
             if (!createdGoal) {
                 res.status(500).json({ status: "failed", message: "Failed to create new goal" });
                 return;
@@ -81,14 +81,15 @@ export const GoalController = {
 
     // [PUT] /goal/:id
     putGoal: async (
-        req: Request<EditGoalParamsType, ResponseType<GoalType>, EditGoalBodyType>, 
-        res: Response<ResponseType<GoalType>>
+        req: Request<EditGoalParamsType, ResponseType<GetGoalType>, EditGoalBodyType>,
+        res: Response<ResponseType<GetGoalType>>
     ): Promise<void> => {
         try {
+            const user_id = req.user?.user_id || "";
             const goal_id = req.params.id;
             const editedGoal = req.body;
 
-            const updatedGoal = await GoalModel.updateGoal(goal_id, editedGoal);
+            const updatedGoal = await GoalModel.updateGoal(user_id, goal_id, editedGoal);
 
             if (!updatedGoal) {
                 res.status(500).json({ status: "failed", message: "Failed to update goal" });

@@ -1,5 +1,6 @@
 import type { Application, Request, Response } from "express";
 import userRoute from './userRoute';
+import authRoute from './authRoute';
 import goalRoute from './goalRoute';
 
 const BASE_URL = '/api/v1';
@@ -15,6 +16,7 @@ function route(app: Application) {
     })
 
     app.use(`${BASE_URL}/user`, userRoute);
+    app.use(`${BASE_URL}/auth`, authRoute);
     app.use(`${BASE_URL}/goal`, goalRoute);
 }
 

@@ -76,10 +76,12 @@ export const GetGoalParamsSchema = z.object({
     id: z.coerce.number().int().positive().transform(val => String(val)),
 });
 
-export const GetGoalReturnSchema = GoalSchema.omit({ goal_id: true });
+export const GetGoalSchema = GoalSchema.omit({ 
+    goal_id: true,
+    user_id: true,
+});
 
 export const CreateGoalBodySchema = GoalSchema.pick({
-    user_id: true,
     title: true,
     description: true,
     expected_outcome: true,
@@ -114,7 +116,7 @@ export type GoalTagType = z.infer<typeof GoalTagSchema>;
 
 export type GetGoalsQueryType = z.infer<typeof GetGoalsQuerySchema>;
 export type GetGoalParamsType = z.infer<typeof GetGoalParamsSchema>;
-export type GetGoalReturnType = z.infer<typeof GetGoalReturnSchema>;
+export type GetGoalType = z.infer<typeof GetGoalSchema>;
 export type CreateGoalBodyType = z.infer<typeof CreateGoalBodySchema>;
 export type EditGoalParamsType = z.infer<typeof EditGoalParamsSchema>;
 export type EditGoalBodyType = z.infer<typeof EditGoalBodySchema>;
