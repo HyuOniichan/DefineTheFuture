@@ -12,11 +12,15 @@ import {
 export const DEFAULT_DAILY_PLAN_ITEM_CREATED_BY = "system";
 export const DEFAULT_DAILY_PLAN_ITEM_STATUS = "pending";
 export const DEFAULT_DAILY_PLAN_STATUS = "draft";
+export const JWT_ALGORITHM = process.env.JWT_ALGORITHM || "HS256";
 
 
 
 // --- Original schemas
 
+export const UserRoleSchema = z.enum([
+    "admin", "user"
+]);
 export const DailyPlanItemCreatedBySchema = z.enum([
     "system", "user"
 ]);
@@ -29,14 +33,20 @@ export const DailyPlanStatusSchema = z.enum([
 
 export const UserSchema = z.object({
     user_id: z.number().int().positive(),
-    setting_id: z.number(),
-    name: z.string().trim(),
+    setting_id: z.number().int().positive(),
+
+    username: z.string().trim().min(1).max(VARCHAR_LENGTH),
+    password_hash: z.string().trim().min(1).max(VARCHAR_LENGTH),
+    refresh_token: z.jwt({ alg: JWT_ALGORITHM }),
+
+    display_name: z.string().trim().min(1).max(VARCHAR_LENGTH),
+    role: UserRoleSchema.default("user"),
 });
 
 export const SettingSchema = z.object({
     setting_id: z.number().int().positive(),
-    long_term_goal: z.string().nullish(),
-    short_term_goal: z.string().nullish(),
+    long_term_goal: z.string().default(""),
+    short_term_goal: z.string().default(""),
     max_active_goals: z.number().default(2),
     max_workpackages_per_day: z.number().default(3),
     max_work_minutes_per_day: z.number().default(120),
@@ -77,12 +87,43 @@ export const DailyPlanSchema = z.object({
 
 // --- Extended schemas
 
+export const AuthRegisterBodySchema = z.object({
+    ...UserSchema.pick({ username: true, display_name: true }).shape,
+    password: z.coerce.string().trim().min(1).max(VARCHAR_LENGTH),
+});
+
+export const AuthLoginBodySchema = z.object({
+    ...UserSchema.pick({ username: true }).shape,
+    password: z.coerce.string().trim().min(1).max(VARCHAR_LENGTH),
+});
+
+export const GetAuthUserSchema = UserSchema.pick({ 
+    user_id: true,
+    username: true,
+    password_hash: true,
+    refresh_token: true,
+    role: true,
+});
+
+export const CreateUserBodySchema = z.object({
+    ...UserSchema.pick({ username: true, display_name: true }).shape,
+    password_hash: z.coerce.string().trim().min(1).max(VARCHAR_LENGTH),
+});
+
+export const CreateSettingBodySchema = SettingSchema.omit({ 
+    setting_id: true 
+});
+
 export const GetUserParamsSchema = z.object({
     id: z.coerce.number().int().positive().transform(val => String(val)),
 });
 
 export const GetUserSchema = z.object({
-    ...UserSchema.omit({ user_id: true }).shape,
+    ...UserSchema.pick({ 
+        username: true,
+        display_name: true,
+        role: true,
+    }).shape,
     ...SettingSchema.omit({ setting_id: true }).shape,
 });
 
@@ -91,6 +132,7 @@ export const GetUserSchema = z.object({
 
 // --- Types
 
+export type UserRoleType = z.infer<typeof UserRoleSchema>;
 export type DailyPlanItemCreatedByType = z.infer<typeof DailyPlanItemCreatedBySchema>;
 export type DailyPlanItemStatusType = z.infer<typeof DailyPlanItemStatusSchema>;
 export type DailyPlanStatusType = z.infer<typeof DailyPlanStatusSchema>;
@@ -101,5 +143,11 @@ export type NotificationType = z.infer<typeof NotificationSchema>;
 export type DailyPlanItemType = z.infer<typeof DailyPlanItemSchema>;
 export type DailyPlanType = z.infer<typeof DailyPlanSchema>;
 
+export type AuthRegisterBodyType = z.infer<typeof AuthRegisterBodySchema>;
+export type AuthLoginBodyType = z.infer<typeof AuthLoginBodySchema>;
+export type GetAuthUserType = z.infer<typeof GetAuthUserSchema>;
+
+export type CreateUserBodyType = z.infer<typeof CreateUserBodySchema>;
+export type CreateSettingBodyType = z.infer<typeof CreateSettingBodySchema>;
 export type GetUserParamsType = z.infer<typeof GetUserParamsSchema>;
 export type GetUserType = z.infer<typeof GetUserSchema>;
