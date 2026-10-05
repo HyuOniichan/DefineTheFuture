@@ -75,6 +75,7 @@ export const WbsDateSchema = z.object({
 export const AutoTimestamptzSchema = z.object({
     created_at: TimestamptzSchema.default(getCurrentTimestamp),
     updated_at: TimestamptzSchema.default(getCurrentTimestamp),
+    deleted_at: TimestamptzSchema.nullish().default(null),
 });
 
 
