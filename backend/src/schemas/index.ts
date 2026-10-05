@@ -1,20 +1,20 @@
 import {
-    VARCHAR_LENGTH, 
-    getCurrentTimestamp, validateStartEndDate, 
-    PostgresIntervalSchema, IntervalSchema, DateSchema, TimestamptzSchema, 
+    VARCHAR_LENGTH,
+    getCurrentTimestamp, validateStartEndDate,
+    PostgresIntervalSchema, IntervalSchema, DateSchema, TimestamptzSchema,
     WbsDateSchema, AutoTimestamptzSchema,
 } from './shared';
 import type {
-    PostgresIntervalType, IntervalType, DateType, TimestamptzType, 
+    PostgresIntervalType, IntervalType, DateType, TimestamptzType,
     WbsDateType, AutoTimestamptzType,
 } from './shared';
-import { 
+import {
     DEFAULT_DAILY_PLAN_ITEM_CREATED_BY, DEFAULT_DAILY_PLAN_ITEM_STATUS, DEFAULT_DAILY_PLAN_STATUS,
-    UserRoleSchema, DailyPlanItemCreatedBySchema, DailyPlanItemStatusSchema, DailyPlanStatusSchema, 
-    UserSchema, SettingSchema, NotificationSchema, DailyPlanItemSchema, DailyPlanSchema, 
+    UserRoleSchema, DailyPlanItemCreatedBySchema, DailyPlanItemStatusSchema, DailyPlanStatusSchema,
+    UserSchema, SettingSchema, NotificationSchema, DailyPlanItemSchema, DailyPlanSchema,
     CreateUserBodySchema, CreateSettingBodySchema, AuthRegisterBodySchema, AuthLoginBodySchema, GetAuthUserSchema, GetUserParamsSchema, GetUserSchema,
 } from './userSchema';
-import type { 
+import type {
     UserRoleType, DailyPlanItemCreatedByType, DailyPlanItemStatusType, DailyPlanStatusType,
     UserType, SettingType, NotificationType, DailyPlanItemType, DailyPlanType,
     CreateUserBodyType, CreateSettingBodyType, AuthRegisterBodyType, AuthLoginBodyType, GetAuthUserType, GetUserParamsType, GetUserType,
@@ -22,40 +22,40 @@ import type {
 import {
     DEFAULT_GOAL_STATUS, DEFAULT_TAG_PRIORITY,
     GoalStatusSchema, GoalSchema, MilestoneSchema, TagSchema, GoalTagSchema,
-    GetGoalsQuerySchema, GetGoalParamsSchema, GetGoalSchema, CreateGoalBodySchema, EditGoalBodySchema, EditGoalParamsSchema
+    GetGoalsQuerySchema, GetGoalQuerySchema, GetGoalParamsSchema, GetGoalSchema, CreateGoalBodySchema, EditGoalBodySchema, EditGoalParamsSchema, DeleteGoalParamsSchema,
 } from './goalSchema';
 import type {
     GoalStatusType,
-    GoalType, MilestoneType, TagType, GoalTagType, 
-    GetGoalsQueryType, GetGoalParamsType, GetGoalType, CreateGoalBodyType, EditGoalBodyType, EditGoalParamsType
+    GoalType, MilestoneType, TagType, GoalTagType,
+    GetGoalsQueryType, GetGoalQueryType, GetGoalParamsType, GetGoalType, CreateGoalBodyType, EditGoalBodyType, EditGoalParamsType, DeleteGoalParamsType,
 } from './goalSchema';
 
 
 export {
-    VARCHAR_LENGTH, 
-    getCurrentTimestamp, validateStartEndDate, 
-    PostgresIntervalSchema, IntervalSchema, DateSchema, TimestamptzSchema, 
+    VARCHAR_LENGTH,
+    getCurrentTimestamp, validateStartEndDate,
+    PostgresIntervalSchema, IntervalSchema, DateSchema, TimestamptzSchema,
     WbsDateSchema, AutoTimestamptzSchema,
-    
+
     DEFAULT_DAILY_PLAN_ITEM_CREATED_BY, DEFAULT_DAILY_PLAN_ITEM_STATUS, DEFAULT_DAILY_PLAN_STATUS,
-    UserRoleSchema, DailyPlanItemCreatedBySchema, DailyPlanItemStatusSchema, DailyPlanStatusSchema, 
-    UserSchema, SettingSchema, NotificationSchema, DailyPlanItemSchema, DailyPlanSchema, 
-    CreateUserBodySchema, CreateSettingBodySchema, AuthRegisterBodySchema, AuthLoginBodySchema, GetAuthUserSchema, GetUserParamsSchema, GetUserSchema, 
-    
+    UserRoleSchema, DailyPlanItemCreatedBySchema, DailyPlanItemStatusSchema, DailyPlanStatusSchema,
+    UserSchema, SettingSchema, NotificationSchema, DailyPlanItemSchema, DailyPlanSchema,
+    CreateUserBodySchema, CreateSettingBodySchema, AuthRegisterBodySchema, AuthLoginBodySchema, GetAuthUserSchema, GetUserParamsSchema, GetUserSchema,
+
     DEFAULT_GOAL_STATUS, DEFAULT_TAG_PRIORITY,
     GoalStatusSchema, GoalSchema, MilestoneSchema, TagSchema, GoalTagSchema,
-    GetGoalsQuerySchema, GetGoalParamsSchema, GetGoalSchema, CreateGoalBodySchema, EditGoalBodySchema, EditGoalParamsSchema
+    GetGoalsQuerySchema, GetGoalQuerySchema, GetGoalParamsSchema, GetGoalSchema, CreateGoalBodySchema, EditGoalBodySchema, EditGoalParamsSchema, DeleteGoalParamsSchema,
 };
 
 export type {
     PostgresIntervalType, IntervalType, DateType, TimestamptzType,
     WbsDateType, AutoTimestamptzType,
-    
+
     UserRoleType, DailyPlanItemCreatedByType, DailyPlanItemStatusType, DailyPlanStatusType,
     UserType, SettingType, NotificationType, DailyPlanItemType, DailyPlanType,
     CreateUserBodyType, CreateSettingBodyType, AuthRegisterBodyType, AuthLoginBodyType, GetAuthUserType, GetUserParamsType, GetUserType,
 
     GoalStatusType,
-    GoalType, MilestoneType, TagType, GoalTagType, 
-    GetGoalsQueryType, GetGoalParamsType, GetGoalType, CreateGoalBodyType, EditGoalBodyType, EditGoalParamsType
+    GoalType, MilestoneType, TagType, GoalTagType,
+    GetGoalsQueryType, GetGoalQueryType, GetGoalParamsType, GetGoalType, CreateGoalBodyType, EditGoalBodyType, EditGoalParamsType, DeleteGoalParamsType,
 }
