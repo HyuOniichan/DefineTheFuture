@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction, RequestHandler } from "express";
 import { ZodObject, ZodError, flattenError } from "zod";
 
 interface RequestValidatorsType {
@@ -7,17 +7,17 @@ interface RequestValidatorsType {
     querySchema?: ZodObject<any>;
 }
 
-export const validateRequest = (validators: RequestValidatorsType) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
+export const validateRequest = (validators: RequestValidatorsType): RequestHandler => {
+    return async (req: Request<any, any, any, any>, res: Response, next: NextFunction) => {
         try {
             if (validators.paramsSchema) {
-                req.params = await validators.paramsSchema.parseAsync(req.params || {}) as any;
+                req.params = await validators.paramsSchema.parseAsync(req.params || {});
             }
             if (validators.bodySchema) {
-                req.body = await validators.bodySchema.parseAsync(req.body || {}) as any;
+                req.body = await validators.bodySchema.parseAsync(req.body || {});
             }
             if (validators.querySchema) {
-                const validatedQuery = await validators.querySchema.parseAsync(req.query || {}) as any;
+                const validatedQuery = await validators.querySchema.parseAsync(req.query || {});
                 Object.defineProperty(req, 'query', { value: validatedQuery, writable: true });
             }
 

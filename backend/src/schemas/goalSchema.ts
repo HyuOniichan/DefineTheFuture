@@ -63,13 +63,11 @@ export const GoalTagSchema = z.object({
 // --- Extended schemas
 
 export const GetGoalsQuerySchema = z.object({
-    user_id: z.coerce.number()
-        .int().positive()
-        .optional()
-        .transform(val => {
-            if (val === undefined) return val;
-            return String(val);
-        }),
+    isDeleted: z.coerce.boolean().optional(),
+});
+
+export const GetGoalQuerySchema = z.object({
+    isDeleted: z.coerce.boolean().optional(),
 });
 
 export const GetGoalParamsSchema = z.object({
@@ -101,7 +99,12 @@ export const EditGoalBodySchema = GoalSchema.pick({
     status: true,
     planned_start_date: true,
     planned_end_date: true,
+    deleted_at: true,
 }).partial().superRefine(validateStartEndDate);
+
+export const DeleteGoalParamsSchema = z.object({
+    id: z.coerce.number().int().positive().transform(val => String(val)),
+});
 
 
 
@@ -115,8 +118,10 @@ export type TagType = z.infer<typeof TagSchema>;
 export type GoalTagType = z.infer<typeof GoalTagSchema>;
 
 export type GetGoalsQueryType = z.infer<typeof GetGoalsQuerySchema>;
+export type GetGoalQueryType = z.infer<typeof GetGoalQuerySchema>;
 export type GetGoalParamsType = z.infer<typeof GetGoalParamsSchema>;
 export type GetGoalType = z.infer<typeof GetGoalSchema>;
 export type CreateGoalBodyType = z.infer<typeof CreateGoalBodySchema>;
 export type EditGoalParamsType = z.infer<typeof EditGoalParamsSchema>;
 export type EditGoalBodyType = z.infer<typeof EditGoalBodySchema>;
+export type DeleteGoalParamsType = z.infer<typeof DeleteGoalParamsSchema>;

@@ -1,46 +1,48 @@
 import { pool } from "../config/db";
-import type { GetGoalType } from "../schemas";
+import { getCurrentTimestamp, type GetGoalType } from "../schemas";
 import type { CreateGoalBodyType, EditGoalBodyType } from "../schemas";
 
 export const GoalModel = {
-    getAllGoals: async (user_id: string): Promise<GetGoalType[] | null> => {
+    getAllGoals: async (user_id: string, isDeleted: boolean = false): Promise<GetGoalType[] | null> => {
         try {
             const sql = `
                 select title, description, expected_outcome, status, 
                     planned_start_date, planned_end_date, 
                     actual_start_date, actual_end_date, 
-                    created_at, updated_at 
+                    created_at, updated_at, deleted_at 
                 from goals
                 where user_id = $1
+                    and deleted_at is ${isDeleted ? 'not' : ''} null
             `;
             const values = [user_id];
-            
+
             const result = await pool.query(sql, values);
             return result.rows || null;
 
-        } catch (err: any) {
-            throw new Error(err?.message || String(err));
+        } catch (error: any) {
+            throw new Error(error?.message || String(error));
         }
     },
 
-    getGoalById: async (user_id: string, goal_id: string): Promise<GetGoalType | null> => {
+    getGoalById: async (user_id: string, goal_id: string, isDeleted: boolean = false): Promise<GetGoalType | null> => {
         try {
             const sql = `
                 select title, description, expected_outcome, status, 
                     planned_start_date, planned_end_date, 
                     actual_start_date, actual_end_date, 
-                    created_at, updated_at 
+                    created_at, updated_at, deleted_at 
                 from goals
                 where user_id = $1
                     and goal_id = $2
+                    and deleted_at is ${isDeleted ? 'not' : ''} null
             `;
             const values = [user_id, goal_id];
 
             const result = await pool.query(sql, values);
             return result.rows[0] || null;
 
-        } catch (err: any) {
-            throw new Error(err?.message || String(err));
+        } catch (error: any) {
+            throw new Error(error?.message || String(error));
         }
     },
 
@@ -55,7 +57,7 @@ export const GoalModel = {
                 returning title, description, expected_outcome, status, 
                     planned_start_date, planned_end_date, 
                     actual_start_date, actual_end_date, 
-                    created_at, updated_at
+                    created_at, updated_at, deleted_at
             `;
             const values = [
                 user_id, newGoal.title, newGoal.description, newGoal.expected_outcome,
@@ -63,8 +65,8 @@ export const GoalModel = {
             ];
             const result = await pool.query(sql, values);
             return result.rows[0] || null;
-        } catch (err: any) {
-            throw new Error(err?.message || String(err));
+        } catch (error: any) {
+            throw new Error(error?.message || String(error));
         }
     },
 
@@ -80,11 +82,11 @@ export const GoalModel = {
                 update goals
                     set ${updateFieldStr}
                 where goal_id = $${nextParamIndex}
-                    and user_id = $${nextParamIndex+1}
+                    and user_id = $${nextParamIndex + 1}
                 returning title, description, expected_outcome, status, 
                     planned_start_date, planned_end_date, 
                     actual_start_date, actual_end_date, 
-                    created_at, updated_at
+                    created_at, updated_at, deleted_at
             `;
 
             const values = Object.entries(editedGoal).map(([k, v]) => v);
@@ -93,8 +95,32 @@ export const GoalModel = {
 
             const result = await pool.query(sql, values);
             return result.rows[0] || null;
-        } catch (err: any) {
-            throw new Error(err?.message || String(err));
+        } catch (error: any) {
+            throw new Error(error?.message || String(error));
         }
-    }
+    },
+
+    deleteGoal: async (user_id: string, goal_id: string): Promise<GetGoalType | null> => {
+        try {
+            const sql = `
+                update goals
+                set deleted_at = $1
+                where user_id = $2
+                    and goal_id = $3
+                    and deleted_at is null
+                returning title, description, expected_outcome, status, 
+                    planned_start_date, planned_end_date, 
+                    actual_start_date, actual_end_date, 
+                    created_at, updated_at, deleted_at
+            `;
+
+            const deletedAt = getCurrentTimestamp();
+            const values = [deletedAt, user_id, goal_id];
+
+            const results = await pool.query(sql, values);
+            return results.rows[0] || null;
+        } catch (error: any) {
+            throw new Error(error?.message || String(error));
+        }
+    },
 };
