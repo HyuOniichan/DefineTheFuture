@@ -1,6 +1,6 @@
 import { pool } from "../config/db";
-import { getCurrentTimestamp, type GetGoalType } from "../schemas";
-import type { CreateGoalBodyType, EditGoalBodyType } from "../schemas";
+import { getCurrentTimestamp, type GetGoalType } from "@definethefuture/contracts";
+import type { CreateGoalBodyType, EditGoalBodyType } from "@definethefuture/contracts";
 
 export const GoalModel = {
     getAllGoals: async (user_id: string, isDeleted: boolean = false): Promise<GetGoalType[] | null> => {

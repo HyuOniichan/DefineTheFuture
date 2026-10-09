@@ -1,5 +1,5 @@
 import { pool } from "../config/db";
-import type { GetUserType } from "../schemas";
+import type { GetUserType } from "@definethefuture/contracts";
 
 export const UserModel = {
     getAllUsers: async (): Promise<GetUserType[] | null> => {

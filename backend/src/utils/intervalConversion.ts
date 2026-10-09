@@ -1,4 +1,4 @@
-import type { IntervalType } from "../schemas";
+import type { IntervalType } from "@definethefuture/contracts";
 
 export const convertIntervalObjectToString = (intervalData: IntervalType) => {
     if (typeof intervalData == 'string') return intervalData;

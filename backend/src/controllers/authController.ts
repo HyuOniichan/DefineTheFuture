@@ -1,10 +1,16 @@
 import type { Request, Response } from "express"
-import type { AuthLoginBodyType, AuthRegisterBodyType, CreateUserBodyType, GetAuthUserType, GetUserType, UserType } from "../schemas";
-import type { ResponseType } from "../types";
-import { generateToken, hashPassword, matchPassword, verifyToken } from "../utils";
+import type { 
+    ResponseType,
+    AuthLoginBodyType, 
+    AuthRegisterBodyType, 
+    CreateUserBodyType, 
+    GetAuthUserType, 
+    GetUserType 
+} from "@definethefuture/contracts";
+import { generateToken, hashPassword, matchPassword } from "../utils";
 import { AuthModel } from "../models/authModel";
 import { UserModel } from "../models/userModel";
-import { JWT_TOKEN_COOKIE_MAX_AGE, ACCESS_TOKEN_EXPIRES_IN, COOKIE_OPTIONS } from "../config/tokens";
+import { JWT_TOKEN_COOKIE_MAX_AGE, COOKIE_OPTIONS } from "../config/tokens";
 
 export const AuthController = {
     // [GET] /me

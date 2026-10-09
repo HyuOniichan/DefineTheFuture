@@ -1,7 +1,6 @@
 import type { Request, Response } from "express"
 import { UserModel } from "../models/userModel"
-import type { GetUserParamsType, GetUserType } from "../schemas";
-import type { ResponseType } from "../types";
+import type { ResponseType, GetUserParamsType, GetUserType } from "@definethefuture/contracts";
 
 export const UserController = {
     // [GET] /user
