@@ -1,16 +1,11 @@
+import { GoalIdPage } from '@/features/goals';
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/goals/$goalId')({
-    component: GoalDetailPage,
+    component: GoalIdRoute,
 })
 
-function GoalDetailPage() {
+function GoalIdRoute() {
     const { goalId } = Route.useParams();
-
-    return <div>
-        <h1>Goal page</h1>
-        <p>Id: {goalId}</p>
-    </div>
+    return <GoalIdPage goalId={goalId} />
 }
-
-

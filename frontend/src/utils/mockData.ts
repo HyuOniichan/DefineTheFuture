@@ -9,6 +9,34 @@ export const USER_NAME = "DND. HUY";
 
 
 
+export const mockHomeMetrics = [
+    {
+        title: "Active goals",
+        highlightedText: "2",
+        normalText: "2",
+        linkText: "Review goals",
+        link: "/goals",
+        commentText: "At your weekly limit",
+    },
+    {
+        title: "Today's progress",
+        highlightedText: "0",
+        normalText: "3",
+        linkText: "Today tasks",
+        link: "/today",
+        commentText: "On a good track",
+    },
+    {
+        title: "Planned time",
+        highlightedText: "2h 55m",
+        linkText: "Check reports",
+        link: "/reports",
+        commentText: "5m completed today",
+    },
+]
+
+
+
 export const mockUsers: IUser[] = [
     { user_id: 1, setting_id: 1, name: "Test 001" }
 ];
