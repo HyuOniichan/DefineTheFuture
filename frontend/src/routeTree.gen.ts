@@ -9,180 +9,278 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as GoalsRouteImport } from './routes/goals'
-import { Route as GoalsIndexRouteImport } from './routes/goals/index'
-import { Route as GoalsGoalIdRouteImport } from './routes/goals/$goalId'
-import { Route as ReportsIndexRouteImport } from './routes/reports/index'
-import { Route as SettingsIndexRouteImport } from './routes/settings/index'
-import { Route as TodayIndexRouteImport } from './routes/today/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as AppGoalsRouteImport } from './routes/_app/goals'
+import { Route as AuthLoginRouteImport } from './routes/_auth/login_'
+import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
+import { Route as AppGoalsIndexRouteImport } from './routes/_app/goals/index'
+import { Route as AppGoalsGoalIdRouteImport } from './routes/_app/goals/$goalId'
+import { Route as AppReportsIndexRouteImport } from './routes/_app/reports/index'
+import { Route as AppSettingsIndexRouteImport } from './routes/_app/settings/index'
+import { Route as AppTodayIndexRouteImport } from './routes/_app/today/index'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GoalsRoute = GoalsRouteImport.update({
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGoalsRoute = AppGoalsRouteImport.update({
   id: '/goals',
   path: '/goals',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
-const GoalsIndexRoute = GoalsIndexRouteImport.update({
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login_',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AppGoalsIndexRoute = AppGoalsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => GoalsRoute,
+  getParentRoute: () => AppGoalsRoute,
 } as any)
-const GoalsGoalIdRoute = GoalsGoalIdRouteImport.update({
+const AppGoalsGoalIdRoute = AppGoalsGoalIdRouteImport.update({
   id: '/$goalId',
   path: '/$goalId',
-  getParentRoute: () => GoalsRoute,
+  getParentRoute: () => AppGoalsRoute,
 } as any)
-const ReportsIndexRoute = ReportsIndexRouteImport.update({
+const AppReportsIndexRoute = AppReportsIndexRouteImport.update({
   id: '/reports/',
   path: '/reports/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
-const SettingsIndexRoute = SettingsIndexRouteImport.update({
+const AppSettingsIndexRoute = AppSettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
-const TodayIndexRoute = TodayIndexRouteImport.update({
+const AppTodayIndexRoute = AppTodayIndexRouteImport.update({
   id: '/today/',
   path: '/today/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/goals': typeof GoalsRouteWithChildren
-  '/goals/$goalId': typeof GoalsGoalIdRoute
-  '/goals/': typeof GoalsIndexRoute
-  '/reports/': typeof ReportsIndexRoute
-  '/settings/': typeof SettingsIndexRoute
-  '/today/': typeof TodayIndexRoute
+  '/': typeof AppIndexRoute
+  '/goals': typeof AppGoalsRouteWithChildren
+  '/login': typeof AuthLoginRoute
+  '/register': typeof AuthRegisterRoute
+  '/goals/$goalId': typeof AppGoalsGoalIdRoute
+  '/goals/': typeof AppGoalsIndexRoute
+  '/reports/': typeof AppReportsIndexRoute
+  '/settings/': typeof AppSettingsIndexRoute
+  '/today/': typeof AppTodayIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/goals/$goalId': typeof GoalsGoalIdRoute
-  '/goals': typeof GoalsIndexRoute
-  '/reports': typeof ReportsIndexRoute
-  '/settings': typeof SettingsIndexRoute
-  '/today': typeof TodayIndexRoute
+  '/': typeof AppIndexRoute
+  '/login': typeof AuthLoginRoute
+  '/register': typeof AuthRegisterRoute
+  '/goals/$goalId': typeof AppGoalsGoalIdRoute
+  '/goals': typeof AppGoalsIndexRoute
+  '/reports': typeof AppReportsIndexRoute
+  '/settings': typeof AppSettingsIndexRoute
+  '/today': typeof AppTodayIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/goals': typeof GoalsRouteWithChildren
-  '/goals/$goalId': typeof GoalsGoalIdRoute
-  '/goals/': typeof GoalsIndexRoute
-  '/reports/': typeof ReportsIndexRoute
-  '/settings/': typeof SettingsIndexRoute
-  '/today/': typeof TodayIndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_auth': typeof AuthRouteWithChildren
+  '/_app/goals': typeof AppGoalsRouteWithChildren
+  '/_auth/login_': typeof AuthLoginRoute
+  '/_auth/register': typeof AuthRegisterRoute
+  '/_app/': typeof AppIndexRoute
+  '/_app/goals/$goalId': typeof AppGoalsGoalIdRoute
+  '/_app/goals/': typeof AppGoalsIndexRoute
+  '/_app/reports/': typeof AppReportsIndexRoute
+  '/_app/settings/': typeof AppSettingsIndexRoute
+  '/_app/today/': typeof AppTodayIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/goals'
+    | '/login'
+    | '/register'
     | '/goals/$goalId'
     | '/goals/'
     | '/reports/'
     | '/settings/'
     | '/today/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/goals/$goalId' | '/goals' | '/reports' | '/settings' | '/today'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/goals/$goalId'
+    | '/goals'
+    | '/reports'
+    | '/settings'
+    | '/today'
   id:
     | '__root__'
-    | '/'
-    | '/goals'
-    | '/goals/$goalId'
-    | '/goals/'
-    | '/reports/'
-    | '/settings/'
-    | '/today/'
+    | '/_app'
+    | '/_auth'
+    | '/_app/goals'
+    | '/_auth/login_'
+    | '/_auth/register'
+    | '/_app/'
+    | '/_app/goals/$goalId'
+    | '/_app/goals/'
+    | '/_app/reports/'
+    | '/_app/settings/'
+    | '/_app/today/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  GoalsRoute: typeof GoalsRouteWithChildren
-  ReportsIndexRoute: typeof ReportsIndexRoute
-  SettingsIndexRoute: typeof SettingsIndexRoute
-  TodayIndexRoute: typeof TodayIndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/goals': {
-      id: '/goals'
+    '/_app/goals': {
+      id: '/_app/goals'
       path: '/goals'
       fullPath: '/goals'
-      preLoaderRoute: typeof GoalsRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppGoalsRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/goals/': {
-      id: '/goals/'
+    '/_auth/login_': {
+      id: '/_auth/login_'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/register': {
+      id: '/_auth/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_app/goals/': {
+      id: '/_app/goals/'
       path: '/'
       fullPath: '/goals/'
-      preLoaderRoute: typeof GoalsIndexRouteImport
-      parentRoute: typeof GoalsRoute
+      preLoaderRoute: typeof AppGoalsIndexRouteImport
+      parentRoute: typeof AppGoalsRoute
     }
-    '/goals/$goalId': {
-      id: '/goals/$goalId'
+    '/_app/goals/$goalId': {
+      id: '/_app/goals/$goalId'
       path: '/$goalId'
       fullPath: '/goals/$goalId'
-      preLoaderRoute: typeof GoalsGoalIdRouteImport
-      parentRoute: typeof GoalsRoute
+      preLoaderRoute: typeof AppGoalsGoalIdRouteImport
+      parentRoute: typeof AppGoalsRoute
     }
-    '/reports/': {
-      id: '/reports/'
+    '/_app/reports/': {
+      id: '/_app/reports/'
       path: '/reports'
       fullPath: '/reports/'
-      preLoaderRoute: typeof ReportsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppReportsIndexRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/settings/': {
-      id: '/settings/'
+    '/_app/settings/': {
+      id: '/_app/settings/'
       path: '/settings'
       fullPath: '/settings/'
-      preLoaderRoute: typeof SettingsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppSettingsIndexRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/today/': {
-      id: '/today/'
+    '/_app/today/': {
+      id: '/_app/today/'
       path: '/today'
       fullPath: '/today/'
-      preLoaderRoute: typeof TodayIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppTodayIndexRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
-interface GoalsRouteChildren {
-  GoalsGoalIdRoute: typeof GoalsGoalIdRoute
-  GoalsIndexRoute: typeof GoalsIndexRoute
+interface AppGoalsRouteChildren {
+  AppGoalsGoalIdRoute: typeof AppGoalsGoalIdRoute
+  AppGoalsIndexRoute: typeof AppGoalsIndexRoute
 }
 
-const GoalsRouteChildren: GoalsRouteChildren = {
-  GoalsGoalIdRoute: GoalsGoalIdRoute,
-  GoalsIndexRoute: GoalsIndexRoute,
+const AppGoalsRouteChildren: AppGoalsRouteChildren = {
+  AppGoalsGoalIdRoute: AppGoalsGoalIdRoute,
+  AppGoalsIndexRoute: AppGoalsIndexRoute,
 }
 
-const GoalsRouteWithChildren = GoalsRoute._addFileChildren(GoalsRouteChildren)
+const AppGoalsRouteWithChildren = AppGoalsRoute._addFileChildren(
+  AppGoalsRouteChildren,
+)
+
+interface AppRouteChildren {
+  AppGoalsRoute: typeof AppGoalsRouteWithChildren
+  AppIndexRoute: typeof AppIndexRoute
+  AppReportsIndexRoute: typeof AppReportsIndexRoute
+  AppSettingsIndexRoute: typeof AppSettingsIndexRoute
+  AppTodayIndexRoute: typeof AppTodayIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppGoalsRoute: AppGoalsRouteWithChildren,
+  AppIndexRoute: AppIndexRoute,
+  AppReportsIndexRoute: AppReportsIndexRoute,
+  AppSettingsIndexRoute: AppSettingsIndexRoute,
+  AppTodayIndexRoute: AppTodayIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface AuthRouteChildren {
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  GoalsRoute: GoalsRouteWithChildren,
-  ReportsIndexRoute: ReportsIndexRoute,
-  SettingsIndexRoute: SettingsIndexRoute,
-  TodayIndexRoute: TodayIndexRoute,
+  AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

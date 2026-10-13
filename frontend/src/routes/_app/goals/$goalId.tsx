@@ -1,7 +1,7 @@
 import { GoalIdPage } from '@/features/goals';
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/goals/$goalId')({
+export const Route = createFileRoute('/_app/goals/$goalId')({
     component: GoalIdRoute,
 })
 
