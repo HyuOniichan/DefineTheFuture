@@ -11,6 +11,9 @@ import "@/index.css";
 const router = createRouter({ 
 	routeTree,
 	trailingSlash: 'never',
+	context: {
+		queryClient,
+	}
 });
 
 declare module '@tanstack/react-router' {

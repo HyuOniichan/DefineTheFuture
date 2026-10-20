@@ -1,3 +1,4 @@
+import { useState, type SyntheticEvent } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -11,12 +12,21 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Logo } from "../Sidebar/Logo"
 import { Link } from "@tanstack/react-router"
+import type { AuthLoginMutationType, AuthRegisterMutationType } from "@/features/auth"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
+import { Eye, EyeOff } from "lucide-react"
 
-type AccountInputCardType = "login" | "register";
 
-interface AccountInputCardProps {
-    type: AccountInputCardType;
-}
+type AccountInputCardProps =
+    | {
+        type: "login",
+        mutation: AuthLoginMutationType,
+    }
+    | {
+        type: "register",
+        mutation: AuthRegisterMutationType,
+    };
+
 
 const navLinks = {
     login: {
@@ -33,7 +43,46 @@ const navLinks = {
     },
 }
 
-export function AccountInputCard({ type }: AccountInputCardProps) {
+
+export function AccountInputCard({ type, mutation }: AccountInputCardProps) {
+    const [showPass, setShowPass] = useState<boolean>(false);
+
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        if (type === "login") {
+            const username = formData.get("username");
+            const password = formData.get("password");
+
+            if (!username || !password) return;
+
+            const body = {
+                username: username.toString().trim(),
+                password: password.toString().trim(),
+            }
+
+            mutation.mutate({ body });
+        }
+
+        if (type === "register") {
+            const username = formData.get("username");
+            const password = formData.get("password");
+            const displayName = formData.get("displayName");
+
+            if (!username || !password || !displayName) return;
+
+            const body = {
+                username: username.toString().trim(),
+                password: password.toString().trim(),
+                display_name: displayName.toString().trim(),
+            }
+
+            mutation.mutate({ body });
+        }
+    }
+
     return (
         <Card className="w-full max-w-sm min-w-120">
             <div className="ml-6">
@@ -51,12 +100,25 @@ export function AccountInputCard({ type }: AccountInputCardProps) {
                 </CardAction>
             </CardHeader>
             <CardContent>
-                <form>
+                <form id="authForm" onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-6">
+                        {type == "register" && (
+                            <div className="grid gap-2">
+                                <Label htmlFor="displayName">Display Name</Label>
+                                <Input
+                                    id="displayName"
+                                    name="displayName"
+                                    type="text"
+                                    placeholder="Sat Thu 567"
+                                    required
+                                />
+                            </div>
+                        )}
                         <div className="grid gap-2">
                             <Label htmlFor="username">Username</Label>
                             <Input
                                 id="username"
+                                name="username"
                                 type="text"
                                 placeholder="traidatchiriengminhta"
                                 required
@@ -74,19 +136,34 @@ export function AccountInputCard({ type }: AccountInputCardProps) {
                                     </Link>
                                 )}
                             </div>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="secret"
-                                required
-                            />
+                            <InputGroup>
+                                <InputGroupInput
+                                    id="password"
+                                    name="password"
+                                    type={showPass ? "text" : "password"}
+                                    placeholder="secret"
+                                    required
+                                />
+                                <InputGroupAddon
+                                    align="inline-end"
+                                    className="hover:cursor-pointer"
+                                    onClick={() => setShowPass(!showPass)}
+                                >
+                                    {showPass ? <Eye /> : <EyeOff />}
+                                </InputGroupAddon>
+                            </InputGroup>
                         </div>
                     </div>
                 </form>
             </CardContent>
             <CardFooter className="flex-col">
-                <Button type="submit" className="w-full">
-                    {navLinks[type].curName}
+                <Button
+                    type="submit"
+                    className="w-full"
+                    form="authForm"
+                    disabled={mutation.isPending}
+                >
+                    {mutation.isPending ? "Waiting for love..." : navLinks[type].curName}
                 </Button>
             </CardFooter>
         </Card>

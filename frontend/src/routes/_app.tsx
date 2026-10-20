@@ -1,8 +1,24 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { Sidebar, Header } from "@/components/shared";
+import { authCurrentUserOptions } from '@/features/auth';
 
 export const Route = createFileRoute('/_app')({
+	beforeLoad: async ({ context }) => {
+		try {
+			const response = await context.queryClient.query({
+				...authCurrentUserOptions,
+				staleTime: 'static',
+			})
+
+			if (!response.data) {
+				throw redirect({ to: '/login' });
+			}
+		} catch (error) {
+			console.log(error);
+			throw redirect({ to: '/login' });
+		}
+	},
 	component: AppLayout,
 })
 
