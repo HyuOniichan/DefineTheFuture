@@ -109,8 +109,8 @@ export const AuthController = {
         res: Response<ResponseType<any>>
     ): Promise<void> => {
         try {
-            res.clearCookie("accessToken");
-            res.clearCookie("refreshToken");
+            res.clearCookie("accessToken", COOKIE_OPTIONS);
+            res.clearCookie("refreshToken", COOKIE_OPTIONS);
 
             res.status(201).json({ status: "success", message: "Logout successfully" });
 
