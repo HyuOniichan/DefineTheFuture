@@ -5,6 +5,7 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -18,14 +19,16 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { mockNotifications } from "@/utils/mockData";
+import { useApiLogout } from "@/features/auth";
 
 const avatarDropdownItems: AvatarItemType[] = [
     { icon: User, title: "Profile", url: "/profile" },
     { icon: Settings, title: "Settings", url: "/settings" },
-    { icon: LogOut, title: "Log out", url: "/logout" },
 ]
 
 export function HeaderActions() {
+    const logoutMutation = useApiLogout();
+
     return (
         <div className="flex items-center gap-[4px]">
             {/* Search */}
@@ -81,6 +84,16 @@ export function HeaderActions() {
                                 </DropdownMenuItem>
                             </Link>
                         ))}
+                    </DropdownMenuGroup>
+                    <DropdownMenuGroup>
+                        <DropdownMenuSeparator className="bg-[#e2e6e2] mx-1" />
+                        <DropdownMenuItem 
+                            className="text-[#ca2a30] hover:bg-muted focus:bg-muted hover:cursor-pointer"
+                            onClick={() => logoutMutation.mutate()}
+                        >
+                            <LogOut /> 
+                            Log out
+                        </DropdownMenuItem>
                     </DropdownMenuGroup>
                 </DropdownMenuContent>
             </DropdownMenu>
