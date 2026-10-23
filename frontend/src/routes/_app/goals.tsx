@@ -1,11 +1,9 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/goals')({
+export const Route = createFileRoute('/_app/goals')({
 	component: GoalsLayout,
 })
 
 function GoalsLayout() {
-	return <div>
-		<Outlet />
-	</div>
+	return <Outlet />
 }

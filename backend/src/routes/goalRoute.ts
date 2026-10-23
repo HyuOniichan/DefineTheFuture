@@ -8,7 +8,7 @@ import {
     EditGoalBodySchema,
     DeleteGoalParamsSchema,
     GetGoalQuerySchema,
-} from "../schemas";
+} from "@definethefuture/contracts";
 import { authenticate } from "../middlewares/authMiddleware";
 
 const router: Router = Router();

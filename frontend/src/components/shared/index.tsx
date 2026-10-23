@@ -1,3 +1,4 @@
+import { AccountInputCard } from "./AuthPage/AccountInputCard";
 import { GoalCard } from "./GoalPage/GoalCard";
 import { Header } from "./Header/Header";
 import { AppBreadcrumb } from "./Header/Breadcrumb";
@@ -8,6 +9,7 @@ import { AppSidebar } from "./Sidebar/Sidebar";
 import { Logo } from "./Sidebar/Logo";
 
 export {
+    AccountInputCard,
     GoalCard,
     Header, AppBreadcrumb as Breadcrumb, HeaderActions,
     Hero,

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController";
 import { validateRequest } from "../middlewares/validateMiddleware";
-import { GetUserParamsSchema } from "../schemas";
+import { GetUserParamsSchema } from "@definethefuture/contracts";
 import { authenticate, authorize } from "../middlewares/authMiddleware";
-import { ROLES } from "../types";
+import { ROLES } from "@definethefuture/contracts";
 
 const router: Router = Router();
 

@@ -21,6 +21,7 @@
   "packageManager": "pnpm@12.5.1",
   "type": "module",
   "dependencies": {
+    "@definethefuture/contracts": "workspace:*",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",

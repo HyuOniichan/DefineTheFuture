@@ -1,5 +1,5 @@
 import jwt, { type Algorithm } from 'jsonwebtoken';
-import { ROLES, type UserPayloadType } from "../types";
+import { ROLES, type UserPayloadType } from "@definethefuture/contracts";
 
 
 type TokenType = "access" | "refresh";

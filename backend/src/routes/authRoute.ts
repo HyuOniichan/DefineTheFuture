@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "../controllers/authController";
 import { validateRequest } from "../middlewares/validateMiddleware";
-import { AuthLoginBodySchema, AuthRegisterBodySchema } from "../schemas";
+import { AuthLoginBodySchema, AuthRegisterBodySchema } from "@definethefuture/contracts";
 import { authenticate } from "../middlewares/authMiddleware";
 
 const router: Router = Router();

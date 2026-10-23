@@ -1,7 +1,6 @@
 import { pool } from "../config/db";
-import type { CreateUserBodyType, GetAuthUserType } from "../schemas";
-import { CreateSettingBodySchema } from "../schemas";
-import type { ResponseType } from "../types";
+import type { CreateUserBodyType, GetAuthUserType } from "@definethefuture/contracts";
+import { CreateSettingBodySchema } from "@definethefuture/contracts";
 import { convertIntervalObjectToString } from "../utils";
 
 export const AuthModel = {

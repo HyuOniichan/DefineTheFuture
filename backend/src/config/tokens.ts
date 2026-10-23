@@ -1,8 +1,9 @@
+import type { CookieOptions } from "express";
 
 export const COOKIE_OPTIONS = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict' as const,
+    secure: process.env.COOKIE_SECURE == "true",
+    sameSite: (process.env.COOKIE_SAMESITE || "none") as CookieOptions['sameSite'],
 };
 
 export const ACCESS_TOKEN_EXPIRES_IN = parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRES_IN || "86400") * 1000; // ms

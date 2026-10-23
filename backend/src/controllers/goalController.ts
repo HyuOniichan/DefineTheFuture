@@ -1,6 +1,7 @@
 import type { Request, Response } from "express"
 import { GoalModel } from "../models/goalModel";
 import type {
+    ResponseType,
     GetGoalParamsType,
     GetGoalType, CreateGoalBodyType,
     EditGoalBodyType,
@@ -8,8 +9,7 @@ import type {
     DeleteGoalParamsType,
     GetGoalsQueryType,
     GetGoalQueryType,
-} from "../schemas";
-import type { ResponseType } from "../types";
+} from "@definethefuture/contracts";
 
 export const GoalController = {
     // [GET] /goal

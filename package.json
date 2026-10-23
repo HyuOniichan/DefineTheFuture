@@ -1,0 +1,28 @@
+{
+  "name": "definethefuture",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": ["frontend", "backend", "packages/*"],
+  "scripts": {
+      "dev:start:frontend": "pnpm --filter frontend dev",
+      "dev:start:backend": "pnpm --filter backend dev",
+      "dev:install:frontend": "pnpm --filter frontend install",
+      "dev:install:backend": "pnpm --filter backend install",
+      "install:frontend": "pnpm --filter-prod frontend install",
+      "install:backend": "pnpm --filter-prod backend install",
+      "build": "pnpm -r build"
+  },
+  "keywords": [],
+  "author": "Duc Huy",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.10.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.10.1",
+  "type": "module"
+}

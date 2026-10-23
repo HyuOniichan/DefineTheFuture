@@ -1,8 +1,13 @@
 import type { Request, Response, NextFunction } from "express"
 import jwt from "jsonwebtoken";
-import { ROLES, TOKENS, type CookiePayloadType, type ResponseType, type UserPayloadType } from "../types"
+import { ROLES, TOKENS } from "@definethefuture/contracts";
+import type {
+    ResponseType, 
+    CookiePayloadType, 
+    UserPayloadType 
+} from "@definethefuture/contracts";
 import { refreshAccessToken, verifyToken } from "../utils";
-import type { UserRoleType } from "../schemas";
+import type { UserRoleType } from "@definethefuture/contracts";
 import { JWT_TOKEN_COOKIE_MAX_AGE, COOKIE_OPTIONS } from "../config/tokens";
 import { extractUserPayloadFromToken } from "../utils/handleJwtToken";
 

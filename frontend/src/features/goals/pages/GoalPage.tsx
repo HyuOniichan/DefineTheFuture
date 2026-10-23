@@ -1,12 +1,7 @@
 import { GoalCard, Hero } from "@/components/shared";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { mockGoals } from "@/utils/mockData";
-import { createFileRoute } from "@tanstack/react-router";
 import { Funnel, Plus } from "lucide-react";
-
-export const Route = createFileRoute('/goals/')({
-    component: GoalPage
-})
 
 const filterItems = [
     { label: "All", value: "all" },
@@ -17,7 +12,7 @@ const filterItems = [
     { label: "Dropped", value: "dropped" }
 ]
 
-function GoalPage() {
+export default function GoalPage() {
     return (
         <div className="mr-10">
             {/* Hero section */}
